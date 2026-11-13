@@ -22,14 +22,13 @@
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;
   padding-top:max(16px,env(safe-area-inset-top));padding-bottom:max(32px,env(safe-area-inset-bottom));
   padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
-.wrap{max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.wrap{max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
 header{display:flex;align-items:center;gap:12px}
 .route{font-family:var(--display);font-weight:700;font-size:34px;line-height:1;background:var(--accent);color:var(--bg);padding:6px 10px;border-radius:6px}
 h1{font-family:var(--display);font-weight:600;font-size:22px;margin:0;line-height:1.1}
 h1 small{display:block;font-family:var(--body);font-size:13px;font-weight:400;color:var(--muted)}
-h2{font-family:var(--display);font-size:20px;margin:8px 0 0}
 .tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:4px;gap:4px}
-.tabs button{font:600 15px var(--body);border:0;background:transparent;color:var(--muted);padding:10px 6px;border-radius:7px}
+.tabs button{font:600 15px var(--body);border:0;background:transparent;color:var(--muted);padding:10px 6px;border-radius:7px;cursor:pointer}
 .tabs button[aria-selected="true"]{background:var(--accent);color:var(--bg)}
 .hero{background:var(--next);color:var(--next-ink);border-radius:12px;padding:16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .hero .lbl{font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
@@ -37,79 +36,83 @@ h2{font-family:var(--display);font-size:20px;margin:8px 0 0}
 .hero .in{text-align:right;font-family:var(--display);font-weight:700;font-size:30px}
 .hero.none{background:var(--surface);color:var(--muted);border:1px solid var(--line);display:block;font-size:15px}
 section{display:flex;flex-direction:column;gap:8px}
-.stops{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;padding:0 4px;text-transform:uppercase;letter-spacing:.05em}
+h2{font-family:var(--display);font-size:20px;margin:6px 4px 0;display:flex;justify-content:space-between;align-items:baseline}
+h2 span{font-family:var(--body);font-size:12px;font-weight:500;color:var(--muted)}
+.stops{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;padding:0 4px;text-transform:uppercase;letter-spacing:.05em}
+.stops span:last-child{text-align:right}
 ol{list-style:none;margin:0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-li{display:flex;justify-content:space-between;align-items:baseline;padding:10px 16px;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
+li{display:flex;justify-content:space-between;align-items:baseline;padding:9px 16px;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
 li:first-child{border-top:0}
-li b{font-family:var(--display);font-size:24px}
+li b{font-family:var(--display);font-size:23px}
 li span{color:var(--muted);font-size:15px}
 li.past b,li.past span{color:var(--past)}
 li.next{background:#ffd23f55}
+.path{font-size:13px;color:var(--muted);line-height:1.5;margin:0 4px}
 .note{font-size:13px;color:var(--muted);line-height:1.5;margin:0}
-.js h2{display:none}
 [hidden]{display:none!important}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header><div class="route">120</div><h1>Ogilvie / Streeterville Express<small>Weekdays only · rush hours</small></h1></header>
+  <header><div class="route">120</div><h1>Ogilvie / Streeterville Express<small>Weekdays only · rush hours · eff. Dec 22, 2025</small></h1></header>
 
-  <div class="tabs" id="tabs" hidden><button id="tab-am">To work · AM</button><button id="tab-pm">Home · PM</button></div>
-  <div id="hero" class="hero" hidden></div>
+  <div class="tabs" id="tabs"><button id="tab-in">To SRALab</button><button id="tab-out">To Ogilvie</button></div>
+  <div id="hero" class="hero"></div>
+  <div id="body"></div>
 
-  <section id="am">
-    <h2>Morning · to work</h2>
-    <div class="stops"><span>Leave Ogilvie</span><span>Arrive Fairbanks/Huron</span></div>
-    <ol>
-      <li><b>7:05</b><span>→ 7:21</span></li><li><b>7:12</b><span>→ 7:28</span></li><li><b>7:20</b><span>→ 7:36</span></li>
-      <li><b>7:27</b><span>→ 7:44</span></li><li><b>7:35</b><span>→ 7:52</span></li><li><b>7:42</b><span>→ 8:00</span></li>
-      <li><b>7:50</b><span>→ 8:08</span></li><li><b>7:57</b><span>→ 8:16</span></li><li><b>8:04</b><span>→ 8:24</span></li>
-      <li><b>8:11</b><span>→ 8:31</span></li><li><b>8:18</b><span>→ 8:39</span></li><li><b>8:28</b><span>→ 8:49</span></li>
-      <li><b>8:38</b><span>→ 8:59</span></li><li><b>8:48</b><span>→ 9:09</span></li><li><b>8:58</b><span>→ 9:19</span></li>
-    </ol>
-    <p class="note">Boards on Canal between Randolph and Washington. Fairbanks/Erie comes about 2 minutes before the Huron time.</p>
-  </section>
-
-  <section id="pm">
-    <h2>Afternoon · home</h2>
-    <div class="stops"><span>Leave Fairbanks/Huron</span><span>Arrive Ogilvie</span></div>
-    <ol>
-      <li><b>4:07</b><span>→ 4:23</span></li><li><b>4:17</b><span>→ 4:32</span></li><li><b>4:29</b><span>→ 4:46</span></li>
-      <li><b>4:37</b><span>→ 4:53</span></li><li><b>4:45</b><span>→ 5:02</span></li><li><b>4:52</b><span>→ 5:10</span></li>
-      <li><b>5:00</b><span>→ 5:18</span></li><li><b>5:09</b><span>→ 5:27</span></li><li><b>5:18</b><span>→ 5:36</span></li>
-      <li><b>5:27</b><span>→ 5:45</span></li><li><b>5:42</b><span>→ 5:59</span></li><li><b>5:58</b><span>→ 6:14</span></li>
-    </ol>
-    <p class="note">PM times rebuilt from a scrambled PDF; double-check once against the printed sheet.</p>
-  </section>
+  <p class="note">CTA publishes times only at the first and last stop. Intermediate stops (like Fairbanks/Ohio) are in between and have no listed time. No midday service: use the 157 on Washington.</p>
 </div>
 <script>
+// [depart, arrive] — times from CTA timetable bus-tt_120.pdf
+var DATA={
+ "in":{label:"To SRALab",blocks:[
+  {name:"Morning",from:"Leave Ogilvie",to:"Arrive Fairbanks/Chicago",
+   path:"Ogilvie (Canal) → Lower Michigan/Lower Wacker → Lower Michigan/Illinois → Fairbanks/Ohio → Fairbanks/Erie → Fairbanks/Superior → Fairbanks/Chicago",
+   pm:false,rows:[["6:05","6:20"],["6:20","6:35"],["6:35","6:50"],["6:48","7:03"],["6:58","7:13"],["7:05","7:21"],["7:12","7:28"],["7:20","7:36"],["7:27","7:44"],["7:35","7:52"],["7:42","8:00"],["7:50","8:08"],["7:57","8:16"],["8:04","8:24"],["8:11","8:31"],["8:18","8:39"],["8:28","8:49"],["8:38","8:59"],["8:48","9:09"],["8:58","9:19"],["9:10","9:30"]]},
+  {name:"Afternoon",from:"Leave Ogilvie",to:"Arrive McClurg/Huron",
+   path:"Ogilvie (Canal) → Lower Michigan/Lower Wacker → Lower Michigan/Illinois → McClurg/Grand → McClurg/Ontario → McClurg/Huron",
+   pm:true,rows:[["3:01","3:16"],["3:29","3:45"],["3:52","4:08"],["4:07","4:23"],["4:17","4:32"],["4:29","4:46"],["4:37","4:53"],["4:45","5:02"],["4:52","5:10"],["5:00","5:18"],["5:09","5:27"],["5:18","5:36"],["5:27","5:45"],["5:42","5:59"],["5:58","6:14"]]}
+ ]},
+ "out":{label:"To Ogilvie",blocks:[
+  {name:"Morning",from:"Leave McClurg/Huron",to:"Arrive Ogilvie",
+   path:"McClurg/Huron → Ontario/McClurg → Fairbanks/Ohio → Lower Michigan/Illinois → Lower Wacker/Lower Michigan → Ogilvie (Canal)",
+   pm:false,rows:[["6:31","6:49"],["6:47","7:04"],["7:02","7:20"],["7:15","7:32"],["7:24","7:42"],["7:31","7:49"],["7:38","7:57"],["7:45","8:04"],["7:52","8:12"],["8:01","8:21"],["8:10","8:30"],["8:24","8:44"],["8:41","9:01"],["9:03","9:20"],["9:24","9:40"]]},
+  {name:"Afternoon",from:"Leave Fairbanks/Huron",to:"Arrive Ogilvie",
+   path:"Fairbanks/Huron → Fairbanks/Ohio → Lower Michigan/Illinois → Lower Wacker/Lower Michigan → Ogilvie (Canal)",
+   pm:true,rows:[["2:39","2:54"],["3:09","3:24"],["3:29","3:44"],["3:44","3:59"],["3:55","4:10"],["4:06","4:22"],["4:13","4:30"],["4:21","4:38"],["4:28","4:46"],["4:36","4:54"],["4:43","5:02"],["4:51","5:10"],["4:58","5:18"],["5:06","5:26"],["5:13","5:33"],["5:21","5:41"],["5:28","5:48"],["5:38","5:58"],["5:48","6:07"],["5:59","6:16"],["6:14","6:28"],["6:29","6:43"]]}
+ ]}
+};
 (function(){
-  document.documentElement.classList.add("js");
-  var tabs=document.getElementById("tabs"),hero=document.getElementById("hero");
-  tabs.hidden=false;hero.hidden=false;
+  var hero=document.getElementById("hero"),body=document.getElementById("body");
   function now(){
     var p=new Intl.DateTimeFormat("en-US",{timeZone:"America/Chicago",hour:"numeric",minute:"numeric",weekday:"short",hourCycle:"h23"}).formatToParts(new Date()),o={};
     p.forEach(function(x){o[x.type]=x.value});
     return {m:+o.hour*60+ +o.minute,wd:o.weekday};
   }
-  var view=now().m<720?"am":"pm";
   function mins(s,pm){var a=s.split(":"),h=+a[0];if(pm&&h<12)h+=12;return h*60+ +a[1];}
+  var view=now().m<720?"in":"out";
   function render(){
-    var n=now(),weekend=n.wd==="Sat"||n.wd==="Sun",pm=view==="pm";
-    document.getElementById("am").hidden=pm;document.getElementById("pm").hidden=!pm;
-    document.getElementById("tab-am").setAttribute("aria-selected",!pm);
-    document.getElementById("tab-pm").setAttribute("aria-selected",pm);
-    var lis=document.querySelectorAll("#"+view+" li"),idx=-1;
-    for(var i=0;i<lis.length;i++){var t=lis[i].querySelector("b").textContent;if(idx<0&&mins(t,pm)>=n.m)idx=i;}
-    for(i=0;i<lis.length;i++){lis[i].className=weekend?"":(idx<0||i<idx?"past":i===idx?"next":"");}
+    var n=now(),weekend=n.wd==="Sat"||n.wd==="Sun",d=DATA[view],html="",next=null;
+    document.getElementById("tab-in").setAttribute("aria-selected",view==="in");
+    document.getElementById("tab-out").setAttribute("aria-selected",view==="out");
+    d.blocks.forEach(function(b){
+      html+='<section><h2>'+b.name+'<span>'+b.rows.length+' trips</span></h2><div class="stops"><span>'+b.from+'</span><span>'+b.to+'</span></div><ol>';
+      b.rows.forEach(function(r){
+        var t=mins(r[0],b.pm),cls="";
+        if(!weekend){if(t<n.m)cls="past";else if(!next){next={r:r,w:t-n.m};cls="next";}}
+        html+='<li class="'+cls+'"><b>'+r[0]+(b.pm?'p':'a')+'</b><span>→ '+r[1]+'</span></li>';
+      });
+      html+='</ol><p class="path">'+b.path+'</p></section>';
+    });
+    body.innerHTML=html;
     if(weekend){hero.className="hero none";hero.textContent="No 120 service on weekends.";return;}
-    if(idx<0){hero.className="hero none";hero.textContent=pm?"Last listed bus has left.":"Morning service is done. Try the PM tab.";return;}
-    var d=lis[idx].querySelector("b").textContent,a=lis[idx].querySelector("span").textContent,w=mins(d,pm)-n.m;
+    if(!next){hero.className="hero none";hero.textContent="No more 120 buses this direction today.";return;}
+    var w=next.w,isPm=mins(next.r[0],true)===mins(next.r[0],false)?false:null;
     hero.className="hero";
-    hero.innerHTML='<div><div class="lbl">Next bus</div><div class="t">'+d+'</div><div>arrives '+a.replace("→ ","")+'</div></div><div class="in">'+(w<=0?"Now":w<60?w+" min":Math.floor(w/60)+"h "+(w%60)+"m")+'</div>';
+    hero.innerHTML='<div><div class="lbl">Next bus · '+d.label+'</div><div class="t">'+next.r[0]+'</div><div>arrives '+next.r[1]+'</div></div><div class="in">'+(w<=0?"Now":w<60?w+" min":Math.floor(w/60)+"h "+(w%60)+"m")+'</div>';
   }
-  document.getElementById("tab-am").onclick=function(){view="am";render();};
-  document.getElementById("tab-pm").onclick=function(){view="pm";render();};
+  document.getElementById("tab-in").onclick=function(){view="in";render();};
+  document.getElementById("tab-out").onclick=function(){view="out";render();};
   render();setInterval(render,30000);
 })();
 </script>
